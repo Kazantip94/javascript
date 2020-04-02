@@ -7,7 +7,6 @@ let deposit = true; //любое булево значение
 let mission = 1000; //любое число (Какую сумму хотите накопить)
 let period; //число от 1 до 12 (месяцев)
 let budgetDay;
-let budgetMonth;
 let expenses1;
 let expenses2;
 let amount1;
@@ -16,34 +15,32 @@ let amount2;
 console.log(typeof money);
 console.log(typeof income);
 console.log(typeof deposit);
-console.log(addExpenses.length);
-console.log('Период равен ' + period + ' месяцев');
-console.log('Цель заработать ' + mission + ' долларов');
-console.log(addExpenses.toLowerCase());
-console.log(addExpenses.split(', '));
 
 money = +prompt('Ваш месячный доход?');
-console.log(money);
 addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
-console.log(addExpenses);
+console.log(Array(addExpenses));
 deposit = confirm('Есть ли у вас депозит в банке?');
-console.log(deposit);
-
 expenses1 = prompt('Введите обязательную статью расходов:');
-console.log(expenses1);
 amount1 = +prompt('Во сколько это обойдется?');
-console.log(amount1);
 expenses2 = prompt('Введите обязательную статью расходов:');
-console.log(expenses2);
 amount2 = +prompt('Во сколько это обойдется?');
-console.log(amount2);
-budgetMonth = money - (amount1 + amount2); //бюджет на месяц
-console.log('Бюджет на месяц ' + budgetMonth);
-period = budgetMonth / mission;
-console.log(Math.ceil(period)); 
-budgetDay = budgetMonth / 30; //дневной бюджет1500
-console.log(Math.floor(budgetDay));
 
+function getExpensesMonth(a, b) {
+    return a + b;  
+}
+let sum = getExpensesMonth(amount1, amount2);
+console.log(sum);
+
+function getAccumulatedMonth(a, b) {
+    return a - b;
+}
+
+getAccumulatedMonth(money, sum);
+
+let accumulatedMonth = getAccumulatedMonth(money, sum);
+
+budgetDay = accumulatedMonth / 30; 
+console.log(Math.floor(budgetDay));
 
 if(budgetDay >= 1200) {
     console.log('У вас высокий уровень дохода');
@@ -55,4 +52,14 @@ if(budgetDay >= 1200) {
     console.log('Что то пошло не так');
 }
 
+function getTargetMonth(a, b) {
+    console.log(a / b + ' месяца');
+}
 
+getTargetMonth(accumulatedMonth, mission);
+
+function getStatusIncome(){
+    console.log();
+}
+
+getStatusIncome();
