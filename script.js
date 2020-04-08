@@ -15,25 +15,25 @@ console.log(checkbox);
 let additionalIncomeItem = document.querySelectorAll('.additional_income-item');
 console.log(additionalIncomeItem);
 
-// let budgetMonth = document.getElementsByClassName('budget_month-value');
-// console.log(budgetMonth);
+let budgetMonth = document.getElementsByClassName('budget_month-value')[0];
+console.log(budgetMonth);
 
-let budgetDay = document.getElementsByClassName('budget_day-value');
+let budgetDay = document.getElementsByClassName('budget_day-value')[0];
 console.log(budgetDay);
 
-let expensesMonth = document.getElementsByClassName('expenses_month-value');
+let expensesMonth = document.getElementsByClassName('expenses_month-value')[0];
 console.log(expensesMonth);
 
-let additionalIncome = document.getElementsByClassName('additional_income-value');
+let additionalIncome = document.getElementsByClassName('additional_income-value')[0];
 console.log(additionalIncome);
 
-let additionalExpenses = document.getElementsByClassName('additional_expenses-value');
+let additionalExpenses = document.getElementsByClassName('additional_expenses-value')[0];
 console.log(additionalExpenses);
 
-let incomePeriod = document.getElementsByClassName('income_period-value');
+let incomePeriod = document.getElementsByClassName('income_period-value')[0];
 console.log(incomePeriod);
 
-let targetMonth = document.getElementsByClassName('target_month-value');
+let targetMonth = document.getElementsByClassName('target_month-value')[0];
 console.log(targetMonth);
 
 let salaryAmount = document.querySelector('.salary-amount');
