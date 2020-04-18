@@ -200,30 +200,14 @@ let start = document.getElementById('start'),
 
 
     AppData.prototype.eventlistener = function() {
-        start.addEventListener('click', appData.start.bind(appData));
-        cancel.addEventListener('click', appData.reset.bind(appData));
-    
-    
-        expensesPlus.addEventListener('click', appData.addExpensesBlock.bind(appData));
-        incomePlus.addEventListener('click', appData.addIncomeBlock.bind(appData));
+       
 
-        // start.addEventListener('click', function() {
-        //     const _this = this;
-        //     _this.start.bind(_this);
-        // });
-        // cancel.addEventListener('click', function() {
-        //     const _this = this;
-        //     _this.reset.bind(_this);
-        // });
-        // expensesPlus.addEventListener('click', function() {
-        //     const _this = this;
-        //     _this.addExpensesBlock.bind(_this);
-        // });
-        // incomePlus.addEventListener('click', function() {
-        //     const _this = this;
-        //     _this.addIncomeBlock.bind(_this);
-        // });
-    
+        start.addEventListener('click', this.start.bind(this));
+        cancel.addEventListener('click', this.reset.bind(this));
+        
+        expensesPlus.addEventListener('click', this.addExpensesBlock.bind(this));
+        incomePlus.addEventListener('click', this.addIncomeBlock.bind(this));
+       
         periodSelect.addEventListener('input', function(){
             periodAmount.innerHTML = this.value;
         });
