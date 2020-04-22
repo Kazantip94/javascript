@@ -32,10 +32,18 @@ window.addEventListener('DOMContentLoaded', function() {
 
         if(timer.timeRemaining < 0){
            clearInterval(interval);  
+
+           timerHours.textContent = '00';
+           timerMinutes.textContent = '00';
+           timerSeconds.textContent = '00';
+           
         }
     }
     updateClock();
     }
 
-    countTimer('23 April 2020');
+    countTimer('24 April 2020');
+
+
+   
 });
