@@ -48,33 +48,36 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
     //Menu
-
     const toggleMenu = () =>{
 
         const btnMenu = document.querySelector('.menu'),
-            menu = document.querySelector('menu'),
-            closeBtn = document.querySelector('.close-btn'),
-            menuItems = menu.querySelectorAll('ul>li');
-        
-        
+            menu = document.querySelector('menu');
+  
         const hendlerMenu = () =>{
             
             menu.classList.toggle('active-menu');
             
         };
+    
         btnMenu.addEventListener('click', hendlerMenu);
-        closeBtn.addEventListener('click', hendlerMenu);
-        menuItems.forEach((elem) => elem.addEventListener('click', hendlerMenu));
 
+        menu.addEventListener('click', (event) => {
+            let target = event.target;
+
+            if(target.classList.contains('close-btn')) {
+                hendlerMenu();
+            }else if(target.closest('ul>li')){
+                hendlerMenu();
+            }
+        });    
     };
 
     toggleMenu();
 
-
+    //popup
     const togglePopUp = () =>{
-        const popup = document.querySelector('.popup'),
-            popupBtn = document.querySelectorAll('.popup-btn'),
-            popUpClose = document.querySelector('.popup-close');
+        const popUp = document.querySelector('.popup'),
+            popupBtn = document.querySelectorAll('.popup-btn');
         let popUpContent = document.querySelector('.popup-content'),
             left = 0;
         let id;
@@ -88,12 +91,12 @@ window.addEventListener('DOMContentLoaded', function() {
                         clearInterval(id);
                     }else{
                         left++;
-                        popup.style.display = 'block';
+                        popUp.style.display = 'block';
                         popUpContent.style.transition = '1s';
                         popUpContent.style.left = left + '%';
                     }
             }else{
-                popup.style.display = 'block';
+                popUp.style.display = 'block';
             }
 
           
@@ -101,13 +104,58 @@ window.addEventListener('DOMContentLoaded', function() {
         
         popupBtn.forEach((elem) => elem.addEventListener('click', frame));
 
-        popUpClose.addEventListener('click', () =>{
-            popup.style.display = 'none';  
-            togglePopUp();
-  
-        });
+        popUp.addEventListener('click', (event) =>{
+            let target = event.target;
 
+            if(target.classList.contains('popup-close')) {
+                popUp.style.display = 'none';
+                togglePopUp();
+  
+            }else{
+                target = target.closest('.popup-content');
+
+                if(!target) {
+                    popUp.style.display = 'none';
+                    togglePopUp();
+                }
+            }
+        });
     };
 
     togglePopUp();
+
+    //табы
+    const tabs = () => {
+        const tabHeader = document.querySelector('.service-header'),
+            tab = tabHeader.querySelectorAll('.service-header-tab'),
+            tabContent = document.querySelectorAll('.service-tab');
+
+            const toggleTabContent = (index) => {
+                for(let i = 0; i < tabContent.length; i++) {
+                    if(index === i) {
+                        tab[i].classList.add('active');
+                        tabContent[i].classList.remove('d-none');
+                    }else{
+                        tab[i].classList.remove('active');
+                        tabContent[i].classList.add('d-none');
+                    }
+                }
+            };
+
+            tabHeader.addEventListener('click', (event) => {
+                let target = event.target;
+
+                    target = target.closest('.service-header-tab');
+
+                    if(target) {
+                        tab.forEach((item, i) => {
+                            if(item === target) {
+                                toggleTabContent(i);                        
+                            }
+                        }); 
+                    }
+            });
+    };
+
+    tabs();
 });
