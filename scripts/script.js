@@ -265,4 +265,41 @@ window.addEventListener('DOMContentLoaded', function() {
     };
 
     slider();
+
+    //Наша команда
+    const ourTeam = () => {
+        const commandPhoto = document.querySelectorAll('.command__photo');
+        let src;
+        commandPhoto.forEach(item => {
+            item.addEventListener('mouseover', function() {
+                src = this.src;
+                this.src = this.dataset.img;
+            });
+            item.addEventListener('mouseout', function() {
+                this.src = src;
+            });
+        });
+    };
+    
+    ourTeam();
+    
+
+    //Калькулятор
+
+    const calcBlock = () => {
+     
+        const calcItem = document.querySelectorAll('.calc-item');
+
+        calcItem.forEach(item  => {
+            item.addEventListener('input', function () {
+                this.value = this.value.replace(/[^0-9+]/, '');
+            });
+        });
+        
+      
+           
+
+        
+    };
+    calcBlock();
 });
