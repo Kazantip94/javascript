@@ -363,6 +363,27 @@ window.addEventListener('DOMContentLoaded', function() {
         const statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 2rem; color:#fff;';
 
+        const postData = (body) => {
+
+            return new Promise((resolve, reject) => {
+                const request = new XMLHttpRequest();
+                request.addEventListener('readystatechange', () => {
+                
+                    if(request.readyState !== 4) {
+                        return;
+                    }
+                    if(request.status === 200) {
+                        resolve();
+                    } else {
+                        reject(request.status);
+                    }
+                });
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
+                request.send(JSON.stringify(body));
+                });
+          };
+
         form.forEach(item => {
 
             //Валидация формы
@@ -393,36 +414,27 @@ window.addEventListener('DOMContentLoaded', function() {
                 formData.forEach((val, key) => {
                     body[key] = val;
                 });
-                postData(body,
-                    () => {
+        
+
+                postData(body)
+                    .then(() => {
                         statusMessage.textContent = successMessage;
-                        item.reset();
-                    },
-                    (error) => {
+                        setTimeout(() =>{
+                            statusMessage.textContent = '';
+                        },3000);
+                    })
+                    .catch(() => {
                         statusMessage.textContent = errorMessage;
-                        console.log(error);
+                        setTimeout(() =>{
+                            statusMessage.textContent = '';
+                        },3000);
+                    })
+                    .finally(() => {
+                        item.querySelectorAll('input').forEach(item => item.value = '');
                     });
     
                 });
         });
-
-          const postData = (body, outputData, errorData) => {
-            const request = new XMLHttpRequest();
-            request.addEventListener('readystatechange', () => {
-               
-                if(request.readyState !== 4) {
-                    return;
-                }
-                if(request.status === 200) {
-                    outputData();
-                } else {
-                    errorData(request.status);
-                }
-            });
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
-            request.send(JSON.stringify(body));
-          };
     };
     sendForm();
 });
