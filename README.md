@@ -1,2 +1,2 @@
 # javascript
-https://kazantip94.github.io/javascript/
+https://kazantip94.github.io/javascript/gh-pages/
